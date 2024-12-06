@@ -34,7 +34,7 @@ async function updateCamera(session: CameraKitSession) {
   });
 
   const source = createMediaStreamSource(mediaStream, {
-    cameraType: 'environment',  // Using the back camera
+    cameraType: 'back',  // Using the back camera
   });
 
   await session.setSource(source);
