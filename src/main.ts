@@ -27,15 +27,18 @@ async function init() {
 
 async function updateCamera(session: CameraKitSession) {
   // Request the back camera by default
-  mediaStream = await navigator.mediaDevices.getUserMedia({
+  
+    mediaStream = await navigator.mediaDevices.getUserMedia({
     video: {
-      facingMode: 'environment',  // Back camera
+      facingMode: isBackFacing ? 'environment' : 'user',
     },
   });
 
   const source = createMediaStreamSource(mediaStream, {
-    cameraType: 'back',  // Using the back camera
+    // NOTE: This is important for world facing experiences
+    cameraType: isBackFacing ? 'back',
   });
+
 
   await session.setSource(source);
 
